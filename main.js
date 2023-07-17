@@ -78,13 +78,13 @@ function gotResult(error, results) {
   }
   console.log(results);
   objects = results;
-  // recognition.start();
+  recognition.start();
 }
 
 
 function draw() {
   image(video, 0, 0, 480, 380);
-  if (status != "") {
+  if (status != false) {
     objectDetector.detect(video, gotResult);
     for (i = 0; i < objects.length; i++) {
       document.getElementById("status").innerHTML = "Status : Objects Detected";
