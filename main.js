@@ -15,7 +15,12 @@ function preload() {
   video.speed(1);
   video.volume(0);
 }
+while(true){
+
 recognition.start();
+
+}
+
 
 function setup() {
   canvas = createCanvas(480, 380);
@@ -55,8 +60,6 @@ function handlefile(file){
     video.loop();
     video.speed(1);
     video.volume(0);
-    recognition.start();
-
   }
   else{
     video = null;
