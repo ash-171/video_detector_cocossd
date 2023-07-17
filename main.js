@@ -3,6 +3,23 @@ objects = [];
 status = "";
 video = "";
 
+var SpeechRecognition = window.webkitSpeechRecognition;
+var recognition = new SpeechRecognition();
+
+recognition.start();
+
+recognition.onresult = function(event) {
+  console.log(event); 
+
+  var content = event.results[0][0].transcript;
+
+  document.getElementById("status").innerHTML = "The Speech has been recognized as: " + content; 
+  if(content == "start"){
+    objectDetector = ml5.objectDetector('cocossd', modelLoaded);
+    document.getElementById("status").innerHTML = "Status : Detecting Objects";
+  }
+}
+
 function preload() {
   video = createVideo('video.mp4');
   video.hide();
@@ -36,10 +53,6 @@ function handlefile(file){
   }
 }
 
-function start() {
-  objectDetector = ml5.objectDetector('cocossd', modelLoaded);
-  document.getElementById("status").innerHTML = "Status : Detecting Objects";
-}
 
 function modelLoaded() {
   console.log("Model Loaded!");
