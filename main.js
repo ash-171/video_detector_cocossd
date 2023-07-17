@@ -7,6 +7,7 @@ var SpeechRecognition = window.webkitSpeechRecognition;
 var recognition = new SpeechRecognition();
 
 recognition.start();
+document.getElementById("status").innerHTML = "Say start to start the video";
 
 recognition.onresult = function(event) {
   console.log(event); 
@@ -16,7 +17,10 @@ recognition.onresult = function(event) {
   document.getElementById("status").innerHTML = "The Speech has been recognized as: " + content; 
   if(content == "start"){
     objectDetector = ml5.objectDetector('cocossd', modelLoaded);
-    document.getElementById("status").innerHTML = "Status : Detecting Objects";
+    document.getElementById("status").innerHTML = "Status : Detecting Objects, say stop to stop the video";
+  }
+  else if(content == "stop"){
+    video.stop();
   }
 }
 
