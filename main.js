@@ -36,7 +36,7 @@ recognition.onresult = function(event) {
     objectDetector = ml5.objectDetector('cocossd', modelLoaded);
     document.getElementById("status").innerHTML = "Status : Detecting Objects, say stop to stop the video";
   }
-  else if(content == "stop"){
+   if(content == "stop"){
     video.stop();
     video = null;
     document.getElementById("status").innerHTML = "Status : Video stopped! Choose another video";
