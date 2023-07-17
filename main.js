@@ -9,11 +9,11 @@ var recognition = new SpeechRecognition();
 document.getElementById("status").innerHTML = "Say start to start the video";
 
 function preload() {
-  // video = createVideo('video.mp4');
-  // video.hide();
-  // video.loop();
-  // video.speed(1);
-  // video.volume(0);
+  video = createVideo('video.mp4');
+  video.hide();
+  video.loop();
+  video.speed(1);
+  video.volume(0);
 }
 recognition.start();
 
@@ -32,21 +32,7 @@ recognition.onresult = function(event) {
   var content = event.results[0][0].transcript;
 
   document.getElementById("status").innerHTML = "The Speech has been recognized as: " + content; 
-  
-}
-function handlefile(file){
-
- 
-  
-  console.log("handlefile called",file.type);
-  if(file.type == 'video'){
-    video = createVideo(file.data);
-    video.hide();
-    video.loop();
-    video.speed(1);
-    video.volume(0);
-    recognition.start();
-    if(content == "start"){
+      if(content == "start"){
     objectDetector = ml5.objectDetector('cocossd', modelLoaded);
     document.getElementById("status").innerHTML = "Status : Detecting Objects, say stop to stop the video";
   }
@@ -55,6 +41,19 @@ function handlefile(file){
     video = null;
     document.getElementById("status").innerHTML = "Status : Video stopped! Choose another video";
   }
+  
+}
+function handlefile(file){
+
+  console.log("handlefile, file type : ",file.type);
+  if(file.type == 'video'){
+    video = createVideo(file.data);
+    video.hide();
+    video.loop();
+    video.speed(1);
+    video.volume(0);
+    recognition.start();
+
   }
   else{
     video = null;
