@@ -15,11 +15,9 @@ function preload() {
   video.speed(1);
   video.volume(0);
 }
-while(true){
+
 
 recognition.start();
-
-}
 
 
 function setup() {
@@ -51,7 +49,7 @@ recognition.onresult = function(event) {
   
 }
 function handlefile(file){
-
+  recognition.start();
   console.log("handlefile, file type : ",file.type);
   if(file.type == 'video'){
     clear();
