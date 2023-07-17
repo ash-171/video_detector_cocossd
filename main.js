@@ -6,6 +6,9 @@ video = "";
 function preload() {
   video = createVideo('video.mp4');
   video.hide();
+  video.loop();
+  video.speed(1);
+  video.volume(0);
 }
 
 
@@ -23,7 +26,10 @@ function handlefile(file){
   console.log("handlefile called",file.type);
   if(file.type == 'video'){
     video = createVideo(file.data);
-    video.hide()
+    video.hide();
+    video.loop();
+    video.speed(1);
+    video.volume(0);
   }
   else{
     video = null;
@@ -33,9 +39,6 @@ function handlefile(file){
 function start() {
   objectDetector = ml5.objectDetector('cocossd', modelLoaded);
   document.getElementById("status").innerHTML = "Status : Detecting Objects";
-  video.loop();
-  video.speed(1);
-  video.volume(0);
 }
 
 function modelLoaded() {
