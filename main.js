@@ -16,20 +16,7 @@ function preload() {
   video.volume(0);
 }
 recognition.start();
-recognition.onresult = function(event) {
-  console.log(event); 
 
-  var content = event.results[0][0].transcript;
-
-  document.getElementById("status").innerHTML = "The Speech has been recognized as: " + content; 
-  if(content == "start"){
-    objectDetector = ml5.objectDetector('cocossd', modelLoaded);
-    document.getElementById("status").innerHTML = "Status : Detecting Objects, say stop to stop the video";
-  }
-  else if(content == "stop"){
-    video.stop();
-  }
-}
 function setup() {
   canvas = createCanvas(480, 380);
   canvas.position(530,80);
@@ -71,6 +58,20 @@ function gotResult(error, results) {
   }
   console.log(results);
   objects = results;
+  recognition.onresult = function(event) {
+  console.log(event); 
+
+  var content = event.results[0][0].transcript;
+
+  document.getElementById("status").innerHTML = "The Speech has been recognized as: " + content; 
+  if(content == "start"){
+    objectDetector = ml5.objectDetector('cocossd', modelLoaded);
+    document.getElementById("status").innerHTML = "Status : Detecting Objects, say stop to stop the video";
+  }
+  else if(content == "stop"){
+    video.stop();
+  }
+}
 }
 
 
