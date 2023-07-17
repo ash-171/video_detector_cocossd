@@ -73,7 +73,7 @@ function gotResult(error, results) {
   }
   console.log(results);
   objects = results;
-  
+  recognition.start();
 }
 
 
