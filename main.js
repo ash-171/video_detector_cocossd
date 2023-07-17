@@ -49,6 +49,7 @@ function handlefile(file){
 
   console.log("handlefile, file type : ",file.type);
   if(file.type == 'video'){
+    clear();
     video = createVideo(file.data);
     video.hide();
     video.loop();
