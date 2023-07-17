@@ -38,6 +38,8 @@ recognition.onresult = function(event) {
   }
   else if(content == "stop"){
     video.stop();
+    video = null;
+    document.getElementById("status").innerHTML = "Status : Video stopped! Choose another video";
   }
 }
 function handlefile(file){
