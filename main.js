@@ -32,7 +32,7 @@ recognition.onresult = function(event) {
   var content = event.results[0][0].transcript;
 
   document.getElementById("status").innerHTML = "The Speech has been recognized as: " + content; 
-      if(content == "start"){
+    if(content == "start"){
     objectDetector = ml5.objectDetector('cocossd', modelLoaded);
     document.getElementById("status").innerHTML = "Status : Detecting Objects, say stop to stop the video";
   }
@@ -41,6 +41,7 @@ recognition.onresult = function(event) {
     status=false;
     document.getElementById("number_of_objects").innerHTML = "";
     document.getElementById("status").innerHTML = "Status : Video stopped! Choose another video";
+    recognition.start();
   }
   
 }
@@ -50,6 +51,7 @@ function handlefile(file){
   if(file.type == 'video'){
     clear();
     video = createVideo(file.data);
+    draw();
     video.hide();
     video.loop();
     video.speed(1);
