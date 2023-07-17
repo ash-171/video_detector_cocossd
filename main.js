@@ -42,7 +42,7 @@ function setup() {
 
 function handlefile(file){
 
-  recognition.start();
+ 
   
   console.log("handlefile called",file.type);
   if(file.type == 'video'){
@@ -51,6 +51,7 @@ function handlefile(file){
     video.loop();
     video.speed(1);
     video.volume(0);
+    recognition.start();
   }
   else{
     video = null;
