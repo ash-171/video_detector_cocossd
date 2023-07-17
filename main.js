@@ -41,6 +41,8 @@ function setup() {
 }
 
 function handlefile(file){
+
+  recognition.start();
   
   console.log("handlefile called",file.type);
   if(file.type == 'video'){
