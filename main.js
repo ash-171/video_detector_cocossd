@@ -33,14 +33,15 @@ function handlefile(file){
 function start() {
   objectDetector = ml5.objectDetector('cocossd', modelLoaded);
   document.getElementById("status").innerHTML = "Status : Detecting Objects";
+  video.loop();
+  video.speed(1);
+  video.volume(0);
 }
 
 function modelLoaded() {
   console.log("Model Loaded!");
   status = true;
-  video.loop();
-  video.speed(1);
-  video.volume(0);
+
 }
 
 function gotResult(error, results) {
