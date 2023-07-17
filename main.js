@@ -2,7 +2,7 @@
 objects = [];
 status = "";
 video = "";
-//136
+
 function preload() {
   video = createVideo('video.mp4');
   video.hide();
@@ -13,22 +13,22 @@ function setup() {
   canvas = createCanvas(480, 380);
   canvas.position(530,80);
 
-  // inputbtn = createFileInput(handlefile);
-  // inputbtn.position(150,80);
+  inputbtn = createFileInput(handlefile);
+  inputbtn.position(200,100);
   
   
 }
 
-// function handlefile(file){
-//   console.log("handlefile called",file.type);
-//   if(file.type == 'video'){
-//     video = createVideo(file.data);
-//     video.hide()
-//   }
-//   else{
-//     video = null;
-//   }
-// }
+function handlefile(file){
+  console.log("handlefile called",file.type);
+  if(file.type == 'video'){
+    video = createVideo(file.data);
+    video.hide()
+  }
+  else{
+    video = null;
+  }
+}
 
 function start() {
   objectDetector = ml5.objectDetector('cocossd', modelLoaded);
@@ -42,7 +42,7 @@ function modelLoaded() {
   video.speed(1);
   video.volume(0);
 }
-//136
+
 function gotResult(error, results) {
   if (error) {
     console.log(error);
@@ -50,10 +50,10 @@ function gotResult(error, results) {
   console.log(results);
   objects = results;
 }
-//136
+
 
 function draw() {
-  image(video, 0, 0, 480, 380);//136
+  image(video, 0, 0, 480, 380);
   if (status != "") {
     objectDetector.detect(video, gotResult);
     for (i = 0; i < objects.length; i++) {
@@ -69,4 +69,3 @@ function draw() {
     }
   }
 }
-//137
