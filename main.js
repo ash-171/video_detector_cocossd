@@ -80,6 +80,7 @@ function gotResult(error, results) {
 
 
 function draw() {
+  recognition.start();
   image(video, 0, 0, 480, 380);
   if (status != "") {
     objectDetector.detect(video, gotResult);
