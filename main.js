@@ -9,11 +9,11 @@ var recognition = new SpeechRecognition();
 document.getElementById("status").innerHTML = "Say start to start the video";
 
 function preload() {
-  video = createVideo('video.mp4');
-  video.hide();
-  video.loop();
-  video.speed(1);
-  video.volume(0);
+  // video = createVideo('video.mp4');
+  // video.hide();
+  // video.loop();
+  // video.speed(1);
+  // video.volume(0);
 }
 recognition.start();
 
