@@ -6,23 +6,7 @@ video = "";
 var SpeechRecognition = window.webkitSpeechRecognition;
 var recognition = new SpeechRecognition();
 
-recognition.start();
-document.getElementById("status").innerHTML = "Say start to start the video";
 
-recognition.onresult = function(event) {
-  console.log(event); 
-
-  var content = event.results[0][0].transcript;
-
-  document.getElementById("status").innerHTML = "The Speech has been recognized as: " + content; 
-  if(content == "start"){
-    objectDetector = ml5.objectDetector('cocossd', modelLoaded);
-    document.getElementById("status").innerHTML = "Status : Detecting Objects, say stop to stop the video";
-  }
-  else if(content == "stop"){
-    video.stop();
-  }
-}
 
 function preload() {
   video = createVideo('video.mp4');
@@ -44,6 +28,23 @@ function setup() {
 }
 
 function handlefile(file){
+  recognition.start();
+  document.getElementById("status").innerHTML = "Say start to start the video";
+
+recognition.onresult = function(event) {
+  console.log(event); 
+
+  var content = event.results[0][0].transcript;
+
+  document.getElementById("status").innerHTML = "The Speech has been recognized as: " + content; 
+  if(content == "start"){
+    objectDetector = ml5.objectDetector('cocossd', modelLoaded);
+    document.getElementById("status").innerHTML = "Status : Detecting Objects, say stop to stop the video";
+  }
+  else if(content == "stop"){
+    video.stop();
+  }
+}
   console.log("handlefile called",file.type);
   if(file.type == 'video'){
     video = createVideo(file.data);
