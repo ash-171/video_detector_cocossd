@@ -51,7 +51,6 @@ function handlefile(file){
   if(file.type == 'video'){
     clear();
     video = createVideo(file.data);
-    draw();
     video.hide();
     video.loop();
     video.speed(1);
