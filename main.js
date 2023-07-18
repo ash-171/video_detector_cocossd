@@ -38,6 +38,7 @@ recognition.onresult = function(event) {
   }
    if(content == "stop"){
     // video.stop();
+     video.hide();
     objectDetector = null;
     status=false;
     document.getElementById("number_of_objects").innerHTML = "";
@@ -51,13 +52,12 @@ function handlefile(file){
   console.log("handlefile, file type : ",file.type);
   if(file.type == 'video'){
     clear();
-    video.elt.src = URL.createObjectURL(file.data);
-    // video = createVideo(file.data);
-    // video.hide();
-    // video.loop();
-    // video.speed(1);
-    // video.volume(0);
-    // recognition.start();
+    video = createVideo(file.data);
+    video.hide();
+    video.loop();
+    video.speed(1);
+    video.volume(0);
+    recognition.start();
   }
   else{
     video = null;
