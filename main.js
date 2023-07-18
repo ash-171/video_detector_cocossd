@@ -8,20 +8,6 @@ var recognition = new SpeechRecognition();
 
 document.getElementById("status").innerHTML = "Say start to start the video";
 
-function stopDetection() {
-  console.log("stopdetection called");
-  if (video) {
-    console.log("video stopped and hidden");
-    video.stop();
-    video.hide();
-  }
-  if (objectDetector != "") {
-    objectDetector.stop();
-  }
-  status = false;
-  document.getElementById("number_of_objects").innerHTML = "";
-  document.getElementById("status").innerHTML = "Status : Detection stopped! Choose another video";
-}
 
 recognition.start();
 recognition.onresult = function(event) {
@@ -33,7 +19,14 @@ recognition.onresult = function(event) {
     document.getElementById("status").innerHTML = "Status : Detecting Objects, say stop to stop the video";
   }
    if(content == "stop"){
-    stopDetection(); 
+    console.log("video stopped and hidden");
+    video.stop();
+    video.hide();
+    objectDetector.stop();
+     status = false;
+  document.getElementById("number_of_objects").innerHTML = "";
+  document.getElementById("status").innerHTML = "Status : Detection stopped! Choose another video";
+     
   } 
 }
 
