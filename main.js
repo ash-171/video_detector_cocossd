@@ -22,6 +22,10 @@ recognition.onresult = function(event) {
   } 
 }
 
+function testfunction(){
+  recognition.start();
+}
+
 function stopDetection() {
   console.log("stopdetection called");
   if (video) {
@@ -73,7 +77,6 @@ function setup() {
 function modelLoaded() {
   console.log("Model Loaded!");
   status = true;
-
 }
 
 function gotResult(error, results) {
@@ -82,7 +85,8 @@ function gotResult(error, results) {
   }
   console.log(results);
   objects = results;
-  recognition.start();
+  testfunction();
+  // recognition.start();
 }
 
 function draw() {
