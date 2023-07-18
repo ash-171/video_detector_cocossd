@@ -8,6 +8,9 @@ var recognition = new SpeechRecognition();
 
 document.getElementById("status").innerHTML = "Say start to start the video";
 
+recognition.start();
+
+
 function preload() {
   video = createVideo('video.mp4');
   video.hide();
@@ -16,24 +19,18 @@ function preload() {
   video.volume(0);
 }
 
-
-recognition.start();
-
-
 function setup() {
   canvas = createCanvas(480, 380);
   canvas.position(530,80);
 
   inputbtn = createFileInput(handlefile);
   inputbtn.position(200,100);
-  
-  
+   
 }
+
 recognition.onresult = function(event) {
   console.log(event); 
-
   var content = event.results[0][0].transcript;
-
   document.getElementById("status").innerHTML = "The Speech has been recognized as: " + content; 
     if(content == "start"){
     objectDetector = ml5.objectDetector('cocossd', modelLoaded);
@@ -54,11 +51,12 @@ function handlefile(file){
   console.log("handlefile, file type : ",file.type);
   if(file.type == 'video'){
     clear();
-    video = createVideo(file.data);
-    video.hide();
-    video.loop();
-    video.speed(1);
-    video.volume(0);
+    video.elt.src = URL.createObjectURL(file.data);
+    // video = createVideo(file.data);
+    // video.hide();
+    // video.loop();
+    // video.speed(1);
+    // video.volume(0);
     // recognition.start();
   }
   else{
