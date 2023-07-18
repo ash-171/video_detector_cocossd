@@ -8,7 +8,6 @@ var recognition = new SpeechRecognition();
 
 document.getElementById("status").innerHTML = "Say start to start the video";
 
-recognition.start();
 recognition.onresult = function(event) {
   console.log(event); 
   var content = event.results[0][0].transcript;
@@ -44,7 +43,7 @@ function handlefile(file) {
     video.loop();
     video.speed(1);
     video.volume(0);
-    // recognition.start();
+    recognition.start();
   } else {
     video = null;
   }
@@ -81,11 +80,12 @@ function gotResult(error, results) {
   }
   console.log(results);
   objects = results;
-  // recognition.start();
+  recognition.start();
 }
 
 
 function draw() {
+  recognition.start();
   image(video, 0, 0, 480, 380);
   if (status != false) {
     objectDetector.detect(video, gotResult);
