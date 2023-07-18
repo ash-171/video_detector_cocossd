@@ -67,7 +67,6 @@ function setup() {
 
   inputbtn = createFileInput(handlefile);
   inputbtn.position(200,100);
-  recognition.start();
   
 }
 
