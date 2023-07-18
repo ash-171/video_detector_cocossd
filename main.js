@@ -40,11 +40,11 @@ recognition.onresult = function(event) {
     document.getElementById("status").innerHTML = "Status : Detecting Objects, say stop to stop the video";
   }
    if(content == "stop"){
-    video.stop();
+    // video.stop();
     objectDetector = null;
     status=false;
     document.getElementById("number_of_objects").innerHTML = "";
-    document.getElementById("status").innerHTML = "Status : Video stopped! Choose another video";
+    document.getElementById("status").innerHTML = "Status : Detection stopped! Choose another video";
     
   }
   
@@ -59,7 +59,7 @@ function handlefile(file){
     video.loop();
     video.speed(1);
     video.volume(0);
-    recognition.start();
+    // recognition.start();
   }
   else{
     video = null;
@@ -79,7 +79,7 @@ function gotResult(error, results) {
   }
   console.log(results);
   objects = results;
-  recognition.start();
+  // recognition.start();
 }
 
 
