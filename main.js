@@ -59,7 +59,7 @@ function handlefile(file){
     video.loop();
     video.speed(1);
     video.volume(0);
-    recognition.start();
+    // recognition.start();
   }
   else{
     video = null;
