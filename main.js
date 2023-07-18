@@ -2,7 +2,6 @@
 objects = [];
 status = "";
 video = "";
-var processResults = true;
 
 var SpeechRecognition = window.webkitSpeechRecognition;
 var recognition = new SpeechRecognition();
@@ -14,7 +13,7 @@ recognition.onresult = function(event) {
   console.log(event); 
   var content = event.results[0][0].transcript;
   document.getElementById("status").innerHTML = "The Speech has been recognized as: " + content; 
-    if(content == "start"){
+  if(content == "start"){
     objectDetector = ml5.objectDetector('cocossd', modelLoaded);
     document.getElementById("status").innerHTML = "Status : Detecting Objects, say stop to stop the video";
   }
@@ -24,7 +23,9 @@ recognition.onresult = function(event) {
 }
 
 function stopDetection() {
+  console.log("stopdetection called");
   if (video) {
+    console.log("video stopped and hidden");
     video.stop();
     video.hide();
   }
@@ -46,7 +47,8 @@ function handlefile(file) {
     video.speed(1);
     video.volume(0);
     recognition.start();
-  } else {
+  } 
+  else {
     video = null;
   }
 }
@@ -65,7 +67,7 @@ function setup() {
 
   inputbtn = createFileInput(handlefile);
   inputbtn.position(200,100);
-  video.loop();
+  
 }
 
 function modelLoaded() {
@@ -78,20 +80,14 @@ function gotResult(error, results) {
   if (error) {
     console.log(error);
   }
-  if (processResults) {
-    console.log(results);
-    objects = results;
-    // Perform further processing or display of results
-    recognition.start();
-    // recognition.start(); if you want to restart recognition after getting results
-  }
-  
+  console.log(results);
+  objects = results;
+  recognition.start();
 }
-
 
 function draw() {
   image(video, 0, 0, 480, 380);
-  if (status != false) {
+  if (status) {
     objectDetector.detect(video, gotResult);
     for (i = 0; i < objects.length; i++) {
       document.getElementById("status").innerHTML = "Status : Objects Detected";
