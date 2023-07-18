@@ -50,13 +50,9 @@ function handlefile(file) {
   }
 }
 
-
 function preload() {
   video = createVideo('video.mp4');
   video.hide();
-  video.loop();
-  video.speed(1);
-  video.volume(0);
 }
 
 function setup() {
@@ -68,11 +64,12 @@ function setup() {
    
 }
 
-
 function modelLoaded() {
   console.log("Model Loaded!");
   status = true;
-
+  video.loop();
+  video.speed(1);
+  video.volume(0);
 }
 
 function gotResult(error, results) {
