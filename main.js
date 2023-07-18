@@ -2,6 +2,7 @@
 objects = [];
 status = "";
 video = "";
+var processResults = true;
 
 var SpeechRecognition = window.webkitSpeechRecognition;
 var recognition = new SpeechRecognition();
@@ -53,6 +54,9 @@ function handlefile(file) {
 function preload() {
   video = createVideo('video.mp4');
   video.hide();
+  video.loop();
+  video.speed(1);
+  video.volume(0);
 }
 
 function setup() {
@@ -61,24 +65,27 @@ function setup() {
 
   inputbtn = createFileInput(handlefile);
   inputbtn.position(200,100);
-   
+  video.loop();
 }
 
 function modelLoaded() {
   console.log("Model Loaded!");
   status = true;
-  video.loop();
-  video.speed(1);
-  video.volume(0);
+
 }
 
 function gotResult(error, results) {
   if (error) {
     console.log(error);
   }
-  console.log(results);
-  objects = results;
-  recognition.start();
+  if (processResults) {
+    console.log(results);
+    objects = results;
+    // Perform further processing or display of results
+    recognition.start();
+    // recognition.start(); if you want to restart recognition after getting results
+  }
+  
 }
 
 
