@@ -41,6 +41,7 @@ recognition.onresult = function(event) {
   }
    if(content == "stop"){
     video.stop();
+    objectDetector = null;
     status=false;
     document.getElementById("number_of_objects").innerHTML = "";
     document.getElementById("status").innerHTML = "Status : Video stopped! Choose another video";
