@@ -10,25 +10,7 @@ document.getElementById("status").innerHTML = "Say start to start the video";
 
 
 recognition.start();
-recognition.onresult = function(event) {
-  console.log(event); 
-  var content = event.results[0][0].transcript;
-  document.getElementById("status").innerHTML = "The Speech has been recognized as: " + content; 
-  if(content == "start"){
-    objectDetector = ml5.objectDetector('cocossd', modelLoaded);
-    document.getElementById("status").innerHTML = "Status : Detecting Objects, say stop to stop the video";
-  }
-   if(content == "stop"){
-    console.log("video stopped and hidden");
-    video.stop();
-    video.hide();
-    objectDetector.stop();
-     status = false;
-  document.getElementById("number_of_objects").innerHTML = "";
-  document.getElementById("status").innerHTML = "Status : Detection stopped! Choose another video";
-     
-  } 
-}
+
 
 
 function handlefile(file) {
@@ -94,4 +76,24 @@ function draw() {
       rect(objects[i].x, objects[i].y, objects[i].width, objects[i].height);
     }
   }
+}
+
+recognition.onresult = function(event) {
+  console.log(event); 
+  var content = event.results[0][0].transcript;
+  document.getElementById("status").innerHTML = "The Speech has been recognized as: " + content; 
+  if(content == "start"){
+    objectDetector = ml5.objectDetector('cocossd', modelLoaded);
+    document.getElementById("status").innerHTML = "Status : Detecting Objects, say stop to stop the video";
+  }
+   if(content == "stop"){
+    console.log("video stopped and hidden");
+    video.stop();
+    video.hide();
+    objectDetector.stop();
+     status = false;
+  document.getElementById("number_of_objects").innerHTML = "";
+  document.getElementById("status").innerHTML = "Status : Detection stopped! Choose another video";
+     
+  } 
 }
