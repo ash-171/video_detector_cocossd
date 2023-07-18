@@ -9,6 +9,46 @@ var recognition = new SpeechRecognition();
 document.getElementById("status").innerHTML = "Say start to start the video";
 
 recognition.start();
+recognition.onresult = function(event) {
+  console.log(event); 
+  var content = event.results[0][0].transcript;
+  document.getElementById("status").innerHTML = "The Speech has been recognized as: " + content; 
+    if(content == "start"){
+    objectDetector = ml5.objectDetector('cocossd', modelLoaded);
+    document.getElementById("status").innerHTML = "Status : Detecting Objects, say stop to stop the video";
+  }
+   if(content == "stop"){
+    stopDetection(); 
+  } 
+}
+
+function stopDetection() {
+  if (video) {
+    video.stop();
+    video.hide();
+  }
+  if (objectDetector) {
+    objectDetector.stop();
+  }
+  status = false;
+  document.getElementById("number_of_objects").innerHTML = "";
+  document.getElementById("status").innerHTML = "Status : Detection stopped! Choose another video";
+}
+
+function handlefile(file) {
+  console.log("handlefile, file type: ", file.type);
+  if (file.type == "video") {
+    clear();
+    video = createVideo(file.data);
+    video.hide();
+    video.loop();
+    video.speed(1);
+    video.volume(0);
+    // recognition.start();
+  } else {
+    video = null;
+  }
+}
 
 
 function preload() {
@@ -26,41 +66,6 @@ function setup() {
   inputbtn = createFileInput(handlefile);
   inputbtn.position(200,100);
    
-}
-
-recognition.onresult = function(event) {
-  console.log(event); 
-  var content = event.results[0][0].transcript;
-  document.getElementById("status").innerHTML = "The Speech has been recognized as: " + content; 
-    if(content == "start"){
-    objectDetector = ml5.objectDetector('cocossd', modelLoaded);
-    document.getElementById("status").innerHTML = "Status : Detecting Objects, say stop to stop the video";
-  }
-   if(content == "stop"){
-    // video.stop();
-     video.hide();
-    objectDetector = null;
-    status=false;
-    document.getElementById("number_of_objects").innerHTML = "";
-    document.getElementById("status").innerHTML = "Status : Detection stopped! Choose another video";
-    
-  }
-  
-}
-function handlefile(file){
-  
-  console.log("handlefile, file type : ",file.type);
-  if(file.type == 'video'){
-    video = createVideo(file.data);
-    video.hide();
-    video.loop();
-    video.speed(1);
-    video.volume(0);
-    recognition.start();
-  }
-  else{
-    video = null;
-  }
 }
 
 
